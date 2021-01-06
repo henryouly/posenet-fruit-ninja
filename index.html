@@ -6,12 +6,10 @@
  </head>
 
   <body>
-    <div id="loading" style='position: relative; left: 0'>
+    <div id="loading" style='display:none'>
         <div id="spinner-text">Loading PoseNet model... </div>
         <div id="sk-spinner-pulse"></div>
     </div>
-
-    <div id="main" style="display:none;z-index:99999999;">
       <div style="width:100%;position:fixed;text-align:center;color:#ffffff;">
         <p>保证摄像头处于未禁用状态，正对摄像头站立，保证左上角摄像头窗口可看见你的上半身，挥舞手臂，划掉New Game。</p>
         <p>挥舞你的手！挥舞你的手！挥舞你的手！</p>
@@ -22,6 +20,7 @@
         <div id="browser"></div>
       </div>
       <div id="posenet" style="">
+        <div id="main" style="display:none;z-index:99999999;">
         <div style="width:160px; padding:4px; background-color: #ffffff;">
           <div style="position: relative;">
             <video id="video" playsinline style=" -moz-transform: scaleX(-1);
@@ -38,9 +37,9 @@
           <button id="clear" type="button" style="width:160px;height:30px;">清除轨迹</button>
         </div>
         <canvas id="output"/>
+        </div>
       </div>
       <div id="info" style="font-size:12pt;color:#ffffff;"></div>
-    </div>
   </body>
   <script src="pose.js"></script>
 </html>
