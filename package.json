@@ -1,8 +1,8 @@
 {
-  "name": "posenet-ninja",
+  "name": "posenet-fruit-ninja",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "pose.js",
   "license": "Apache-2.0",
   "private": true,
   "engines": {
