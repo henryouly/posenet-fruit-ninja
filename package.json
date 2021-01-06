@@ -55,11 +55,5 @@
   },
   "eslintIgnore": [
     "dist/"
-  ],
-  "alias": {
-    "scripts": "./scripts",
-    "lib": "./scripts/lib",
-    "images": "./images",
-    "sound": "./sound"
-  }
+  ]
 }
