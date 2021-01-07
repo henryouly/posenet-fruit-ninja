@@ -10,7 +10,7 @@ const videoWidth = 640; // screen.width;
 const videoHeight = 480; // screen.height;
 const miniVideoWidth = 160;
 const miniVideoHeight = 120;
-const mini_scale = 0.25;
+const miniScale = 0.25;
 let actionCount = 0;
 let lastPair = null;
 let lastActionTime = 0;
@@ -125,16 +125,16 @@ function detectPoseInRealTime(video, net) {
     stats.showPanel(0);
     document.body.appendChild(stats.dom);
     const canvas = document.getElementById('output');
-    const canvas_mini = document.getElementById('output_mini');
+    const canvasMini = document.getElementById('output_mini');
     const ctx = canvas.getContext('2d');
-    const ctx_mini = canvas_mini.getContext('2d');
+    const ctxMini = canvasMini.getContext('2d');
     // since images are being fed from a webcam
     const flipHorizontal = true;
 
     canvas.width = videoWidth;
     canvas.height = videoHeight;
-    canvas_mini.width = miniVideoWidth;
-    canvas_mini.height = miniVideoHeight;
+    canvasMini.width = miniVideoWidth;
+    canvasMini.height = miniVideoHeight;
 
     async function poseDetectionFrame() {
         if (guiState.changeToArchitecture) {
@@ -208,9 +208,9 @@ function detectPoseInRealTime(video, net) {
                 // drawKeypoints(keypoints, minPartConfidence, ctx, scale = 1, radius = 3);
 
                 // 小窗中绘制识别到的关键点
-                ctx_mini.clearRect(0, 0, canvas_mini.width, canvas_mini.height);
-                drawKeypoints(keypoints, minPartConfidence, ctx_mini, mini_scale);
-                drawSkeleton(keypoints, minPartConfidence, ctx_mini, mini_scale);
+                ctxMini.clearRect(0, 0, canvasMini.width, canvasMini.height);
+                drawKeypoints(keypoints, minPartConfidence, ctxMini, miniScale);
+                drawSkeleton(keypoints, minPartConfidence, ctxMini, miniScale);
 
                 if (guiState.output.showPoints) {
                     let filteredKeypoints = filterKeypoints(['rightWrist', 'leftWrist'],
@@ -236,10 +236,10 @@ function detectPoseInRealTime(video, net) {
                                 // let leftDistance = calcDistance(lastPair.left, currentPair.left);
                                 // if (leftDistance > miniDistance && leftDistance < maxDistance) {
                                 if (true) {
-                                    var dx = currentPair.left.position.x - lastPair.left.position.x;
-                                        var dy = currentPair.left.position.y - lastPair.left.position.y;
-                                        var x = currentPair.left.position.x + xOffset;
-                                        var y = currentPair.left.position.y + yOffset;
+                                    let dx = currentPair.left.position.x - lastPair.left.position.x;
+                                    let dy = currentPair.left.position.y - lastPair.left.position.y;
+                                    let x = currentPair.left.position.x + xOffset;
+                                    let y = currentPair.left.position.y + yOffset;
 
                                     // showInfo("x=" + x + ", y=" + y + ", distance=" + leftDistance);
                                     personDragger1.left.fire('returnValue', [dx, dy, x, y, null, 'left']);
@@ -261,10 +261,10 @@ function detectPoseInRealTime(video, net) {
                                 // let rightDistance = calcDistance(lastPair.right, currentPair.right);
                                 // if (rightDistance > miniDistance && rightDistance < maxDistance) {
                                 if (true) {
-                                    var dx = lastPair.right.position.x - currentPair.right.position.x;
-                                        var dy = lastPair.right.position.y - currentPair.right.position.y;
-                                        var x = lastPair.right.position.x + xOffset;
-                                        var y = lastPair.right.position.y + yOffset;
+                                    let dx = lastPair.right.position.x - currentPair.right.position.x;
+                                    let dy = lastPair.right.position.y - currentPair.right.position.y;
+                                    let x = lastPair.right.position.x + xOffset;
+                                    let y = lastPair.right.position.y + yOffset;
 
                                     // showInfo("x=" + x + ", y=" + y);
                                     personDragger1.right.fire('returnValue', [dx, dy, x, y, null, 'right']);
@@ -338,12 +338,12 @@ function splitKeyPoints(points) {
     return pair;
 }
 
-function filterKeypoints(part_names, keypoints, minPartConfidence, miniDistance=leftRightMiniDistance, maxX = videoWidth, maxY=videoHeight) {
+function filterKeypoints(partNames, keypoints, minPartConfidence, miniDistance=leftRightMiniDistance, maxX = videoWidth, maxY=videoHeight) {
     let result = [];
-    for (let point_index = 0; point_index < keypoints.length && result.length < part_names.length; point_index++) {
-        let point = keypoints[point_index];
-        for (let name_index = 0; name_index < part_names.length; name_index++) {
-            if (part_names[name_index] == point.part) {
+    for (let pointIndex = 0; pointIndex < keypoints.length && result.length < partNames.length; pointIndex++) {
+        let point = keypoints[pointIndex];
+        for (let nameIndex = 0; nameIndex < partNames.length; nameIndex++) {
+            if (partNames[nameIndex] == point.part) {
                 if (point.score > minPartConfidence &&
                     point.position.x <= maxX && point.position.y <= maxY &&
                     point.position.x >= 0 && point.position.y >= 0) {
