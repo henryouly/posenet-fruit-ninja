@@ -1,7 +1,7 @@
 import * as posenet from '@tensorflow-models/posenet';
 import {drawBoundingBox, drawSegment, drawKeypoints, drawSkeleton, isMobile, toggleLoadingUI} from './demo_util';
 
-import {startModule, installPoseDragger} from "fruit-ninja";
+import {startModule, installPoseDragger} from 'fruit-ninja';
 
 import dat from 'dat.gui';
 import Stats from 'stats.js';
@@ -122,8 +122,8 @@ function getHand() {
 
 function detectPoseInRealTime(video, net) {
     let stats = new Stats();
-	    stats.showPanel(0);
-	    document.body.appendChild(stats.dom);
+    stats.showPanel(0);
+    document.body.appendChild(stats.dom);
     const canvas = document.getElementById('output');
     const canvas_mini = document.getElementById('output_mini');
     const ctx = canvas.getContext('2d');
@@ -356,11 +356,11 @@ function filterKeypoints(part_names, keypoints, minPartConfidence, miniDistance=
 }
 
 async function bindPage() {
-    toggleLoadingUI(true);
+    showInfo('Loading PoseNet model...');
     const net = await posenet.load(guiState.input);
-    toggleLoadingUI(false);
     guiState.net = net;
 
+    document.getElementById('main').style.display = 'block';
     document.getElementById('clear').onclick = function() {
         output = document.getElementById('output');
         ctx = output.getContext('2d');
@@ -370,6 +370,7 @@ async function bindPage() {
     let video;
 
     try {
+      showInfo('Loading Video...');
       video = await loadVideo();
     } catch (e) {
       let info = document.getElementById('info');
@@ -379,7 +380,7 @@ async function bindPage() {
       throw e;
     }
 
-    showInfo('开始检测姿势');
+    showInfo('Starting Game...');
     detectPoseInRealTime(video, net);
 }
 

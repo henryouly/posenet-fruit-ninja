@@ -6,40 +6,33 @@
  </head>
 
   <body>
-    <div id="loading" style='display:none'>
-        <div id="spinner-text">Loading PoseNet model... </div>
-        <div id="sk-spinner-pulse"></div>
+    <div style="width:100%;position:fixed;text-align:center;color:#ffffff;">
+      <p>保证摄像头处于未禁用状态，正对摄像头站立，保证左上角摄像头窗口可看见你的上半身，挥舞手臂，划掉New Game。</p>
+      <p>挥舞你的手！挥舞你的手！挥舞你的手！</p>
     </div>
-      <div style="width:100%;position:fixed;text-align:center;color:#ffffff;">
-        <p>保证摄像头处于未禁用状态，正对摄像头站立，保证左上角摄像头窗口可看见你的上半身，挥舞手臂，划掉New Game。</p>
-        <p>挥舞你的手！挥舞你的手！挥舞你的手！</p>
-      </div>
-      <div id="extra"></div>
-      <canvas id="view" width="640" height="480"></canvas>
-      <div id="desc">
-        <div id="browser"></div>
-      </div>
-      <div id="posenet" style="">
-        <div id="main" style="display:none;z-index:99999999;">
-        <div style="width:160px; padding:4px; background-color: #ffffff;">
-          <div style="position: relative;">
-            <video id="video" playsinline style=" -moz-transform: scaleX(-1);
-                -o-transform: scaleX(-1);
-                -webkit-transform: scaleX(-1);
-                transform: scaleX(-1);
-                display: block;
-                width: 160px;
-                height: 120px;
-                ">
-            </video>
-            <canvas id="output_mini" width="160" height="120" style="display: block;position: absolute;top:0;"/>
-          </div>
-          <button id="clear" type="button" style="width:160px;height:30px;">清除轨迹</button>
+    <div id="extra"></div>
+    <canvas id="view" width="640" height="480"></canvas>
+    <div id="posenet" style="">
+      <div id="main" style="display:none; z-index:99999999;">
+      <div style="width:160px; padding:4px; background-color: #ffffff;">
+        <div style="position: relative;">
+          <video id="video" playsinline style=" -moz-transform: scaleX(-1);
+              -o-transform: scaleX(-1);
+              -webkit-transform: scaleX(-1);
+              transform: scaleX(-1);
+              display: block;
+              width: 160px;
+              height: 120px;
+              ">
+          </video>
+          <canvas id="output_mini" width="160" height="120" style="display: block;position: absolute;top:0;"/>
         </div>
-        <canvas id="output"/>
-        </div>
+        <button id="clear" type="button" style="width:160px;height:30px;">清除轨迹</button>
       </div>
-      <div id="info" style="font-size:12pt;color:#ffffff;"></div>
+      <canvas id="output"/>
+    </div>
+  </div>
+  <div id="info" style="font-size:12pt;color:#ffffff;"></div>
   </body>
   <script src="pose.js"></script>
 </html>

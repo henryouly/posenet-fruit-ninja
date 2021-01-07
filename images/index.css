@@ -138,33 +138,6 @@ em{
 	z-index: 0;
 }
 
-#desc{
-	width: 100%;
-	position: absolute;
-	left: 0;
-	top: 50%;
-	height: 80px;
-	color: #ccc;
-	line-height: 40px;
-	margin-top: 200px;
-	text-align: center;
-	font-size: 14px;
-}
-
-#desc a{
-	color: #318fe1;
-}
-
-#browser{
-	font-size: 14px;
-	line-height: 16px;
-}
-
-#browser .b{
-	color: #fff;
-	font-weight: 700;
-}
-
 #spinner-text{
   float: left;
 	color: #ccc;
