@@ -213,10 +213,10 @@ function detectPoseInRealTime(video, net) {
                 drawSkeleton(keypoints, minPartConfidence, ctxMini, miniScale);
 
                 if (guiState.output.showPoints) {
-                    let leftWrist = keypoints.find((point) => point.part === 'leftWrist');
-                    let rightWrist = keypoints.find((point) => point.part == 'rightWrist');
+                    let leftWrist = keypoints.find((point) => (point.part === 'leftWrist' && point.score > minPartConfidence));
+                    let rightWrist = keypoints.find((point) => (point.part === 'rightWrist' && point.score > minPartConfidence));
                     let currentPair = {left: leftWrist, right: rightWrist};
-                    let filteredKeypoints = Object.values(currentPair);
+                    let filteredKeypoints = Object.values(currentPair).filter((el) => el !== undefined);
                     // console.log(JSON.stringify(filteredKeypoints));
                     if (filteredKeypoints.length > 0) {
                         // ctx.clearRect(0, 0, videoWidth, videoHeight);
