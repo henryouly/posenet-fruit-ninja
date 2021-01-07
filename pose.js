@@ -213,8 +213,9 @@ function detectPoseInRealTime(video, net) {
                 drawSkeleton(keypoints, minPartConfidence, ctxMini, miniScale);
 
                 if (guiState.output.showPoints) {
-                    let filteredKeypoints = filterKeypoints(['rightWrist', 'leftWrist'],
-                        keypoints, minPartConfidence);
+                    let leftWrist = keypoints.find(point => point.part === 'leftWrist');
+                    let rightWrist = keypoints.find(point => point.part == 'rightWrist');
+                    let filteredKeypoints = [leftWrist, rightWrist];
                     // console.log(JSON.stringify(filteredKeypoints));
                     if (filteredKeypoints.length > 0) {
                         // ctx.clearRect(0, 0, videoWidth, videoHeight);
@@ -336,23 +337,6 @@ function splitKeyPoints(points) {
     }
 
     return pair;
-}
-
-function filterKeypoints(partNames, keypoints, minPartConfidence, miniDistance=leftRightMiniDistance, maxX = videoWidth, maxY=videoHeight) {
-    let result = [];
-    for (let pointIndex = 0; pointIndex < keypoints.length && result.length < partNames.length; pointIndex++) {
-        let point = keypoints[pointIndex];
-        for (let nameIndex = 0; nameIndex < partNames.length; nameIndex++) {
-            if (partNames[nameIndex] == point.part) {
-                if (point.score > minPartConfidence &&
-                    point.position.x <= maxX && point.position.y <= maxY &&
-                    point.position.x >= 0 && point.position.y >= 0) {
-                    result.push(point);
-                }
-            }
-        }
-    }
-    return result;
 }
 
 async function bindPage() {
